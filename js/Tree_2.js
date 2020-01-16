@@ -55,7 +55,7 @@ Tree.prototype.operateInPreOrder = function (nodeIndex, depth, isLastSon, isLeaf
 		};
 	}
 
-	operator.operate(nodeIndex, depth, isLastSon, isLeaf, this);	// bindでハマったわ。bindの動き詳しく調べなあかな。
+	operator.operate(nodeIndex, depth, isLastSon, isLeaf, this);
 
 };
 
@@ -72,7 +72,7 @@ Tree.prototype.operateInPreOrder.opTypes.makeLine = (function () {
 
 		},
 
-		resetRuledLineThisDepth = function (depth, isLastSon) {		// 先順走査に依存しているのか？ほかの走査方法でもはたらくのか？
+		resetRuledLineThisDepth = function (depth, isLastSon) {		// 先順走査に依存している処理だと思う
 
 			if (! isLastSon && ! isRuledLines[depth]) isRuledLines[depth] = true;
 
