@@ -1,0 +1,19 @@
+test = ( function () {
+	
+	const	submit = document.querySelector("body > p:nth-child(5) > form > input[type=submit]:nth-child(3)"),
+		select = document.querySelector("body > p:nth-child(5) > form > select"),
+		options = Object.values(select.options);
+
+	return function () {
+		
+		let option;
+	
+		if (typeof (option = options.pop() ) === "undefined" ) return;
+
+		select.value = option.value; 		
+		submit.click();
+
+		setTimeout(test, 100);	
+
+	};
+})(); 
