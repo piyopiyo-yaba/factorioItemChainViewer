@@ -75,10 +75,9 @@ FactorioItems.prototype.initItems = function (configs) {	// アイテムイン�
 		}
 
 
+		if (typeof this[name] !== "undefined") {
 
-		if (processName) {
-
-			this[`${name}_(${processName})`] = new FactorioItem.factory(itemType, config);
+			this[name].registerProcess(config);
 
 		} else {
 
@@ -90,6 +89,8 @@ FactorioItems.prototype.initItems = function (configs) {	// アイテムイン�
 
 };
 
+// -------------------------------------------------prototype--------------------------------------------------
+
 FactorioItems.prototype.createTree = function (userInput) {			// 明日はここから直そうね。productName_(productProcess)は....
 
 	const	{inputProductNum, inputProductName} = userInput,		// ユーザーが選んだアイテム名と、その数
@@ -100,7 +101,9 @@ FactorioItems.prototype.createTree = function (userInput) {			// 明日はここ
 	let	item = this[inputProductName],
 		index = 0,
 		productName,
-		productNum;
+		productNum,
+		process,
+		recipe;
 
 	if(typeof item === "undefined") return console.log(inputProductName);
 
@@ -112,24 +115,41 @@ FactorioItems.prototype.createTree = function (userInput) {			// 明日はここ
 		productName = partsName[index];
 		productNum = partsNum[index];
 
-		if (typeof (item = this[productName]) === "undefined") 
-
 		item = this[productName];
+
+		if (typeof item.hasProcess !== "function") console.log(partsName[index])
+		if (item.hasProcess() ) {
+
+			process = document.getElementById(item.name);
+			process = process.value
+
+		} else process = null;
+
+		process = item.processMap.get(process);	
+
+		recipe = process.recipeMap;	
+
 		item.accProductNum(productNum);
 
 		partsEdge[index] = [];
 
-		item.recipeForEach( (partNum, partName, recipe) => {		// Map.forEach
+		if (recipe === null) {
+			index++;
+			continue;
+		}		
 
-			let currentPartIndex;
+		recipe.forEach( (partNum, partName, recipe) => {		// Map.forEach
 
-			partNum = item.calcPartNum(productNum, partNum);
+			let 	i = 0,
+				currentPartIndex;
+
+			partNum = productNum / process.productNum * partNum;
 
 			partsNum.push(partNum);
 			partsName.push(partName);
 
 			currentPartIndex = partsName.length - 1;
-
+			
 			partsEdge[index].push(currentPartIndex);		//　アイテムノードの序数と材料ノードの序数を関連付けている。
 			
 		});
