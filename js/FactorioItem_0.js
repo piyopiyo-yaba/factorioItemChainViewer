@@ -3,17 +3,41 @@ FactorioItem = function (config) {	// json.stringfyはNaNを勝手にnullにす�
 	const {name, processName, productionTime, productNum, recipe, facility} = config;
 
 	this.name = name;					// 製品名
-	this.processName = processName;				// プロセス名
-	this.productionTime = productionTime;			// 生産時間[number]
-	this.productNum = productNum;				// 生産数[number]
-	this.recipe = recipe !== null ? new Map(recipe) : null;	// [必要アイテム, 必要数]
+	this.processMap = this.createProcessMap(config);	//  [ [processName, recipe] ...]  
 	this.facility = facility;				// 生産設備
 
 	this.totalProductNum = 0;				
 
 };
 
-FactorioItem.prototype.reset = function () {
+// -------------------------------------------------prototype--------------------------------------------------
+FactorioItem.prototype.createProcessMap = function(config) {
+	
+	const 	{processName, productionTime, productNum, recipe} = config,
+		recipeMap = recipe !== null ? new Map(recipe) : null;
+
+	return new Map([[processName, {recipeMap, productionTime, productNum} ] ] );
+	
+};
+
+FactorioItem.prototype.registerProcess = function(config) {
+	
+	const 	{processName, productionTime, productNum, recipe} = config,
+		recipeMap = recipe !== null ? new Map(recipe) : null;
+
+	this.processMap.set(processName, {recipeMap, productionTime, productNum});
+	
+};
+
+
+FactorioItem.prototype.hasProcess = function() {
+	
+	if (this.processMap.size > 1) return true;
+	else return false;
+	
+};
+
+FactorioItem.prototype.resetNumber = function () {
 
 	this.totalProductNum = 0;
 	this.totalFacilitiesNum = 0;
@@ -21,8 +45,9 @@ FactorioItem.prototype.reset = function () {
 };
 
 FactorioItem.prototype.calcPartNum = function(productNum, partNum) {
-	
-	const	productRatio = productNum / this.productNum;
+
+	const 	process = this.processMap.get(processName),
+		productRatio = productNum / process.productNum;
 
 	return	productRatio * partNum;
 
