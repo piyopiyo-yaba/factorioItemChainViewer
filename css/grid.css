@@ -1,0 +1,45 @@
+@charset "UTF-8";
+
+body		{
+			margin: 0;
+		}
+
+#wrapper	{
+			display: grid;
+			grid-template:	[header-top] "form config view" 250px [header-bottom]
+                 			[main-top]   "graph graph view" 1fr [main-bottom]
+                			/ 1fr 1fr 1fr;
+		}
+
+#formBox	{
+			background-color: lime;
+			grid-area: form;
+			padding: 15px;
+		}
+
+#configBox	{
+			background-color: lightblue;
+			grid-area: config;
+			padding: 15px;
+		}
+
+.sticky		{
+        		position: sticky;
+       		 	top: 0;
+    		}
+
+.config		{
+			margin: 0;
+		}
+
+#outputGraphBox	{
+			background-color: yellow;
+			grid-area: graph;
+			padding: 15px;
+		}
+
+#outputViewBox	{
+			background-color: red;
+			grid-area: view;
+			padding: 15px;
+		}	
