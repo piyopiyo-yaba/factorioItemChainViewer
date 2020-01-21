@@ -6,9 +6,9 @@ body		{
 
 #wrapper	{
 			display: grid;
-			grid-template:	[header-top] "form config view" 250px [header-bottom]
+			grid-template:	[header-top] "form config view" 275px [header-bottom]
                  			[main-top]   "graph graph view" 1fr [main-bottom]
-                			/ 1fr 1fr 1fr;
+                			/ 1fr 1fr 150px;
 		}
 
 #formBox	{
