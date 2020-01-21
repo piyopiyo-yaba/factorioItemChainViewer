@@ -1,16 +1,37 @@
 <!docutype html>
 <html lang="ja">
 	<head>
-	<meta charset="utf-8">
-	
+		<meta charset="utf-8">
+		<link rel="stylesheet" href=".\css\grid.css">
 	</head>
 
 	<body>
-	
+		<div id="wrapper">
+			<div id="formBox" class="sticky">
+				<p><span>target production </span><select id="inputProduct"></select></p>
+				<p><span>quantity </span><input id="inputNum" type="number" value="1"  step="1"></p>
+				<p><span></span><input id="calcButton" type="button" value="GO"></p>
+			</div>
+			<div id="configBox" class="sticky">
+				<p>process config</p>
+				<p class="config"><span>【solid-fuel】 :</span><select id="solid-fuel"></select></p>
+				<p class="config"><span>【uranium-235】 :</span><select id="uranium-235"></select></p>
+				<p class="config"><span>【uranium-238】 :</span><select id="uranium-238"></select></p>
+				<p class="config"><span>【heavy-oil】 :</span><select id="heavy-oil"></select></p>
+				<p class="config"><span>【light-oil】 :</span><select id="light-oil"></select></p>
+				<p class="config"><span>【petroleum-gas】 :</span><select id="petroleum-gas"></select></p>
+			</div>
+			<div id="outputGraphBox">
+			
+			</div>
+			<div id="outputViewBox">
+			
+			</div>
+		</div>
 
-	<script src=".\js\Tree_2.js"></script>
-	<script src=".\js\FactorioItem_0.js"></script>
-	<script src=".\js\FactorioItems_0.js"></script>
-	<script src=".\js\main.js"></script>
+		<script src=".\js\Tree_2.js"></script>
+		<script src=".\js\FactorioItem_0.js"></script>
+		<script src=".\js\FactorioItems_0.js"></script>
+		<script src=".\js\main.js"></script>
 	</body>
 </html>
