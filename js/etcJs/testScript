@@ -1,7 +1,7 @@
 test = ( function () {
 	
-	const	submit = document.querySelector("body > p:nth-child(5) > form > input[type=submit]:nth-child(3)"),
-		select = document.querySelector("body > p:nth-child(5) > form > select"),
+	const	submit = document.getElementById("calcButton"),
+		select = document.getElementById("inputProduct"),
 		options = Object.values(select.options);
 
 	return function () {
@@ -13,7 +13,7 @@ test = ( function () {
 		select.value = option.value; 		
 		submit.click();
 
-		setTimeout(test, 100);	
+		setTimeout(test, 50);	
 
 	};
 })(); 
