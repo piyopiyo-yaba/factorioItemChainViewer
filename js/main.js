@@ -20,7 +20,7 @@
 		factorioItems = new FactorioItems(factorioItemsData),
 		items = Object.values(factorioItems),
 	
-		opType = "makeLine";
+		opType = "makeHTMLFragment";
 
 	items.forEach( (item) => {		// option要素準備
 	
@@ -73,10 +73,10 @@
 		const	tree = new Tree( factorioItems.createTree(input) );
 		
 		tree.opType = opType;
-		tree.operateInPreOrder.opTypes[opType].resetText();
+		tree.operateInPreOrder.opTypes[opType].resetText(outputGraph);
 		tree.preOrder();
 
-		outputGraph.textContent = tree.operateInPreOrder.opTypes[opType].getText();
+		tree.operateInPreOrder.opTypes[opType].setResult(outputGraph);
 		
 	};
 
